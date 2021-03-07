@@ -9,3 +9,8 @@ export class Delete {
   static readonly type = "[Co2] Delete";
   constructor(public index: number) {}
 }
+
+export class SelectItem {
+  static readonly type = "[Co2] SelectItem";
+  constructor(public payload: Co2) {}
+}
