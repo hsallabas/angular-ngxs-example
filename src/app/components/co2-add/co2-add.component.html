@@ -2,8 +2,8 @@
   <mat-form-field>
     <mat-label>Sector</mat-label>
     <mat-select formControlName="sector">
-      <mat-option *ngFor="let sector of sectors" [value]="sector.value">
-        {{sector.value}}
+      <mat-option *ngFor="let sector of sectors" [value]="sector.name">
+        {{sector.name}}
       </mat-option>
     </mat-select>
   </mat-form-field>

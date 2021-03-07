@@ -1,5 +1,6 @@
 <div>
-    <mat-table [dataSource]="co2list" class="mat-elevation-z8 ">
+  <ng-container *ngIf="list$ | async as list">
+    <mat-table [dataSource]="list.data" class="mat-elevation-z8 ">
       <ng-container matColumnDef="sector">
         <mat-header-cell *matHeaderCellDef> Sector </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.sector}} </mat-cell>
@@ -19,4 +20,5 @@
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
+  </ng-container>
 </div>
