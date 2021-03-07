@@ -1,8 +1,9 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatDialog } from "@angular/material";
 import { Select, Store } from "@ngxs/store";
-import { Observable } from "rxjs";
+import { Observable, Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 import { Co2 } from "../../models/co2.model";
 import { Sector } from "../../models/sector.model";
 import { Co2SelectedState } from "../../state/co2-selected.state";
@@ -23,10 +24,11 @@ const SECTOR_DATA: Sector[] = [
   templateUrl: "./co2-add.component.html",
   styleUrls: ["./co2-add.component.scss"]
 })
-export class Co2AddComponent implements OnInit {
+export class Co2AddComponent implements OnInit, OnDestroy {
   co2DataForm: FormGroup;
   sectors = SECTOR_DATA;
   @Select(Co2SelectedState) selectedRow$: Observable<Co2>;
+  public unsubscribe$ = new Subject<boolean>();
 
   constructor(
     private fb: FormBuilder,
@@ -37,16 +39,22 @@ export class Co2AddComponent implements OnInit {
   ngOnInit(): void {
     this.co2DataForm = this.fb.group({
       id: [-1],
-      sector: ["", Validators.required],
-      co2Value: [0, Validators.required],
-      feeling: ["😀", Validators.required]
+      sector: ["", [Validators.required]],
+      co2Value: [0, [Validators.required]],
+      feeling: ["😀", [Validators.required]]
     });
     this.co2DataForm.setValidators(NoneNegative);
-    this.selectedRow$.pipe().subscribe(res => {
+
+    this.selectedRow$.pipe(takeUntil(this.unsubscribe$)).subscribe(res => {
       if (res && res["data"] && res["data"].id >= 0) {
         this.co2DataForm.patchValue(res["data"]);
       }
     });
+  }
+
+  public ngOnDestroy() {
+    this.unsubscribe$.next(true);
+    this.unsubscribe$.unsubscribe();
   }
 
   selectEmoji() {
@@ -74,6 +82,7 @@ export class Co2AddComponent implements OnInit {
       };
       this.store.dispatch(new SelectItem(emptyCo2));
       this.co2DataForm.patchValue(emptyCo2);
+      this.co2DataForm.controls.sector.setErrors(null);
     }
   }
 }
