@@ -1,0 +1,22 @@
+<div>
+    <mat-table [dataSource]="co2list" class="mat-elevation-z8 ">
+      <ng-container matColumnDef="sector">
+        <mat-header-cell *matHeaderCellDef> Sector </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.sector}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="co2Value">
+        <mat-header-cell *matHeaderCellDef> CO2 </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.co2Value}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="feeling">
+        <mat-header-cell *matHeaderCellDef> Feeling </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.feeling}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+</div>
