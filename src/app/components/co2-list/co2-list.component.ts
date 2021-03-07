@@ -18,11 +18,17 @@ export class Co2ListComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  /**
+   * Edit co2 row value according to index
+   */
   edit(item: Co2, index: number) {
     const selectedRow = { ...item, id: index };
     this.store.dispatch(new SelectItem(selectedRow));
   }
 
+  /**
+   * Delete co2 row according to index
+   */
   delete(index: number) {
     this.store.dispatch(new Delete(index));
   }

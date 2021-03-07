@@ -52,6 +52,7 @@ export class Co2AddComponent implements OnInit, OnDestroy {
     });
     this.co2DataForm.setValidators(NoneNegative);
 
+    // get selected row data
     this.selectedRow$.pipe(takeUntil(this.unsubscribe$)).subscribe(res => {
       if (res && res["data"] && res["data"].id >= 0) {
         this.co2DataForm.patchValue(res["data"]);
@@ -64,6 +65,9 @@ export class Co2AddComponent implements OnInit, OnDestroy {
     this.unsubscribe$.unsubscribe();
   }
 
+  /**
+   * open select emoji modal
+   */
   selectEmoji() {
     const dialogRef = this.dialog.open(EmojiModalComponent, {
       panelClass: "my-full-screen-dialog"
@@ -75,8 +79,10 @@ export class Co2AddComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * update or add new co2 row
+   */
   submit() {
-    console.log(this.co2DataForm.valid);
     if (this.co2DataForm.valid) {
       if (this.co2DataForm.value.id > -1) {
         this.store.dispatch(new Update(this.co2DataForm.value));

@@ -15,6 +15,9 @@ export interface Co2ListStateModel {
 })
 @Injectable()
 export class Co2ListState {
+  /**
+   * Add new row to list
+   */
   @Action(Add)
   addCo2(ctx: StateContext<Co2ListStateModel>, action: Add) {
     const state = ctx.getState();
@@ -24,6 +27,9 @@ export class Co2ListState {
     });
   }
 
+  /**
+   * Delete selected row from list
+   */
   @Action(Delete)
   deleteCo2(ctx: StateContext<Co2ListStateModel>, action: Delete) {
     const state = ctx.getState();
@@ -34,6 +40,9 @@ export class Co2ListState {
     });
   }
 
+  /**
+   * Update selected row
+   */
   @Action(Update)
   updateCo2(ctx: StateContext<Co2ListStateModel>, action: Update) {
     const state = ctx.getState();
