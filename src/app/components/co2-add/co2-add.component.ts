@@ -6,8 +6,9 @@ import { Observable } from "rxjs";
 import { Co2 } from "../../models/co2.model";
 import { Sector } from "../../models/sector.model";
 import { Co2SelectedState } from "../../state/co2-selected.state";
-import { Add, Update } from "../../state/co2.actions";
+import { Add, SelectItem, Update } from "../../state/co2.actions";
 import { EmojiModalComponent } from "./emoji-modal/emoji-modal.component";
+import { NonNegative } from "./positive-number-validator.directive";
 
 const SECTOR_DATA: Sector[] = [
   { id: 1, name: "Construction" },
@@ -40,7 +41,7 @@ export class Co2AddComponent implements OnInit {
       co2Value: [0, Validators.required],
       feeling: ["😀", Validators.required]
     });
-
+    this.co2DataForm.setValidators(NonNegative);
     this.selectedRow$.pipe().subscribe(res => {
       if (res && res["data"] && res["data"].id >= 0) {
         this.co2DataForm.patchValue(res["data"]);
@@ -58,13 +59,21 @@ export class Co2AddComponent implements OnInit {
   }
 
   submit() {
+    console.log(this.co2DataForm.valid);
     if (this.co2DataForm.valid) {
       if (this.co2DataForm.value.id > -1) {
         this.store.dispatch(new Update(this.co2DataForm.value));
       } else {
         this.store.dispatch(new Add(this.co2DataForm.value));
       }
-       this.co2DataForm.reset();
+      const emptyCo2 = {
+        id: -1,
+        sector: "",
+        co2Value: "",
+        feeling: ""
+      };
+      this.store.dispatch(new SelectItem(emptyCo2));
+      this.co2DataForm.patchValue(emptyCo2);
     }
   }
 }
