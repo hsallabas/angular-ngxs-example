@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { State, Action, StateContext } from "@ngxs/store";
 import { Co2 } from "../models/co2.model";
-import { Add, Delete } from "./co2.actions";
+import { Add, Delete, Update } from "./co2.actions";
 
 export interface Co2ListStateModel {
   data: Co2[];
@@ -28,6 +28,16 @@ export class Co2ListState {
   deleteCo2(ctx: StateContext<Co2ListStateModel>, action: Delete) {
     const state = ctx.getState();
     state.data.splice(action.index, 1);
+    ctx.setState({
+      ...state,
+      data: [...state.data]
+    });
+  }
+
+  @Action(Update)
+  updateCo2(ctx: StateContext<Co2ListStateModel>, action: Update) {
+    const state = ctx.getState();
+    state.data[action.payload.id] = action.payload;
     ctx.setState({
       ...state,
       data: [...state.data]

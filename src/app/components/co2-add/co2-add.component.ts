@@ -6,7 +6,7 @@ import { Observable } from "rxjs";
 import { Co2 } from "../../models/co2.model";
 import { Sector } from "../../models/sector.model";
 import { Co2SelectedState } from "../../state/co2-selected.state";
-import { Add } from "../../state/co2.actions";
+import { Add, Update } from "../../state/co2.actions";
 import { EmojiModalComponent } from "./emoji-modal/emoji-modal.component";
 
 const SECTOR_DATA: Sector[] = [
@@ -35,17 +35,15 @@ export class Co2AddComponent implements OnInit {
 
   ngOnInit(): void {
     this.co2DataForm = this.fb.group({
-      id: [],
+      id: [-1],
       sector: ["", Validators.required],
       co2Value: [0, Validators.required],
       feeling: ["😀", Validators.required]
     });
 
     this.selectedRow$.pipe().subscribe(res => {
-      console.log(res);
       if (res && res["data"] && res["data"].id >= 0) {
         this.co2DataForm.patchValue(res["data"]);
-        console.log(this.co2DataForm.value);
       }
     });
   }
@@ -60,6 +58,13 @@ export class Co2AddComponent implements OnInit {
   }
 
   submit() {
-    this.store.dispatch(new Add(this.co2DataForm.value));
+    if (this.co2DataForm.valid) {
+      console.log(this.co2DataForm.value.id);
+      if (this.co2DataForm.value > -1) {
+        this.store.dispatch(new Update(this.co2DataForm.value));
+      } else {
+        this.store.dispatch(new Add(this.co2DataForm.value));
+      }
+    }
   }
 }

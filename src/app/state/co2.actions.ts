@@ -14,3 +14,8 @@ export class SelectItem {
   static readonly type = "[Co2] SelectItem";
   constructor(public payload: Co2) {}
 }
+
+export class Update {
+  static readonly type = "[Co2] Update";
+  constructor(public payload: Co2) {}
+}

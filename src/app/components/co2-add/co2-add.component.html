@@ -9,9 +9,13 @@
   </mat-form-field>
   <mat-form-field>
     <mat-label>CO2</mat-label>
-    <input type="number" matInput formControlName="co2Value" placeholder="35">
+    <input type="number" matInput formControlName="co2Value" placeholder="35" />
   </mat-form-field>
   <p>{{co2DataForm.value.feeling}}</p>
-  <button mat-stroked-button color="primary" (click)="selectEmoji()">Select Emoji</button>
-  <button mat-flat-button color="primary" (click)="submit()">Submit</button>
+  <button mat-stroked-button color="primary" (click)="selectEmoji()">
+    {{co2DataForm.value.id > -1 ? 'Edit Emoji' : 'Select Emoji'}}
+  </button>
+  <button mat-flat-button color="primary" (click)="submit()">
+    {{co2DataForm.value.id > -1 ? 'Update' : 'Submit'}}
+  </button>
 </form>

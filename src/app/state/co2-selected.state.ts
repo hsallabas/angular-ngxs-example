@@ -11,7 +11,7 @@ export interface Co2SelectedStateModel {
   name: "Co2Selected",
   defaults: {
     data: {
-      id: 0,
+      id: -1,
       sector: "",
       co2Value: "",
       feeling: ""
