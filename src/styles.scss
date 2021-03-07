@@ -17,9 +17,12 @@ body {
   }
 }
 
-@media screen and (max-width: 375px) {
-  .dialog-style .mat-dialog-container {
-    height: 100vh;
-    width: 100vw;
+.dialog-style {
+  width: 40%;
+}
+
+@media only screen and (max-width: 769px) {
+  .dialog-style {
+    width: 100%;
   }
 }
