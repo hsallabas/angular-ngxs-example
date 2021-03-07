@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { State, Action, StateContext } from "@ngxs/store";
 import { Co2 } from "../models/co2.model";
-import { Add } from "./co2.actions";
+import { Add, Delete } from "./co2.actions";
 
 export interface Co2StateModel {
   data: Co2[];
@@ -16,12 +16,21 @@ export interface Co2StateModel {
 @Injectable()
 export class Co2State {
   @Action(Add)
-  feedZebra(ctx: StateContext<Co2StateModel>, action: Add) {
+  addCo2(ctx: StateContext<Co2StateModel>, action: Add) {
     const state = ctx.getState();
-    console.log(action.payload);
     ctx.setState({
       ...state,
       data: [...state.data, action.payload]
+    });
+  }
+
+  @Action(Delete)
+  deleteCo2(ctx: StateContext<Co2StateModel>, action: Delete) {
+    const state = ctx.getState();
+    state.data.splice(action.index, 1);
+    ctx.setState({
+      ...state,
+      data: [...state.data]
     });
   }
 }
