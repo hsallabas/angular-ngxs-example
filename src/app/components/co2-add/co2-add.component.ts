@@ -59,12 +59,12 @@ export class Co2AddComponent implements OnInit {
 
   submit() {
     if (this.co2DataForm.valid) {
-      console.log(this.co2DataForm.value.id);
-      if (this.co2DataForm.value > -1) {
+      if (this.co2DataForm.value.id > -1) {
         this.store.dispatch(new Update(this.co2DataForm.value));
       } else {
         this.store.dispatch(new Add(this.co2DataForm.value));
       }
+       this.co2DataForm.reset();
     }
   }
 }
