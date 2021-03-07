@@ -17,7 +17,8 @@
     display: flex;
     flex-direction: column;
     min-width: 250px;
-    border: 1px solid #ccc;
+    border: 1px solid;
+    border-color: rgba(0, 0, 0, 0.12);
     padding: 1.5rem;
     border-radius: 5px;
   }

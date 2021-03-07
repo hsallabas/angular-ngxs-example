@@ -1,6 +1,6 @@
 <div class="list-wrapper">
   <ng-container *ngIf="list$ | async as list">
-    <mat-table [dataSource]="list.data" class="mat-elevation-z8 ">
+    <mat-table [dataSource]="list.data" class="mat-elevation-z0">
       <ng-container matColumnDef="sector">
         <mat-header-cell *matHeaderCellDef> Sector </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.sector}} </mat-cell>
@@ -8,10 +8,7 @@
 
       <ng-container matColumnDef="co2Value">
         <mat-header-cell *matHeaderCellDef> CO2 </mat-header-cell>
-        <mat-cell
-          *matCellDef="let element"
-          [ngStyle]="{'color': element.co2Value > 25 ? 'red':'green'}"
-        >
+        <mat-cell *matCellDef="let element" [ngStyle]="{'color': element.co2Value > 25 ? 'red':'green'}">
           {{element.co2Value}}
         </mat-cell>
       </ng-container>
@@ -22,7 +19,7 @@
       </ng-container>
 
       <ng-container matColumnDef="editButtons">
-        <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
         <mat-cell *matCellDef="let element; let i=index;">
           <button mat-icon-button color="primary" (click)="edit(element, i)">
             <mat-icon>create</mat-icon>
@@ -32,7 +29,6 @@
           </button>
         </mat-cell>
       </ng-container>
-
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>

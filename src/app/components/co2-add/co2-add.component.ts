@@ -65,7 +65,9 @@ export class Co2AddComponent implements OnInit, OnDestroy {
   }
 
   selectEmoji() {
-    const dialogRef = this.dialog.open(EmojiModalComponent);
+    const dialogRef = this.dialog.open(EmojiModalComponent, {
+      panelClass: 'dialog-style'
+    });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.co2DataForm.patchValue({ feeling: result.emoji.native });

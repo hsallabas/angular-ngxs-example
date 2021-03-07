@@ -10,8 +10,16 @@ body {
   display: flex;
   justify-content: center;
   flex-direction: column;
+  padding: 1rem;
 
-  @media screen and (min-width: 577px) {
+  @media screen and (min-width: 769px) {
     flex-direction: row;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .dialog-style .mat-dialog-container {
+    height: 100vh;
+    width: 100vw;
   }
 }

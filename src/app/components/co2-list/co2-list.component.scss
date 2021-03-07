@@ -1,4 +1,24 @@
 .list-wrapper {
   width: 100%;
 
+  @media screen and (min-width: 577px) {
+    min-width: 380px;
+  }
+
+  @media screen and (min-width: 769px) {
+    margin-left: 1.5rem;
+  }
+
+  @media screen and (min-width: 1024px) {
+    min-width: 500px;
+  }
+
+  mat-table {
+    border: 1px solid;
+    border-color: rgba(0, 0, 0, 0.12);
+
+    mat-cell {
+      font-size: 0.75rem;
+    }
+  }
 }
