@@ -1,6 +1,7 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined");
 @import "~@ctrl/ngx-emoji-mart/picker";
+@import "material-theme.scss";
 
 body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
@@ -22,5 +23,15 @@ body {
     height: 100vh;
     width: 100vw !important;
     max-width: none !important;
+  }
+}
+
+.dark-theme {
+  form {
+    background-color: #424242;
+  }
+
+  .form-title {
+    color: #ffffff !important;
   }
 }

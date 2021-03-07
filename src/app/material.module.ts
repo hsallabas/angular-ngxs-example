@@ -5,6 +5,7 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatTableModule } from "@angular/material/table";
 import { MatIconModule } from "@angular/material/icon";
 import { MatDialogModule } from "@angular/material";
+import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 
 @NgModule({
   exports: [
@@ -14,6 +15,7 @@ import { MatDialogModule } from "@angular/material";
     MatTableModule,
     MatIconModule,
     MatDialogModule,
+    MatSlideToggleModule
   ]
 })
 export class MaterialModule {}
