@@ -1,21 +1,42 @@
-<form [formGroup]="co2DataForm" class="table-add-item">
-  <mat-form-field>
-    <mat-label>Sector</mat-label>
-    <mat-select formControlName="sector">
-      <mat-option *ngFor="let sector of sectors" [value]="sector.name">
-        {{sector.name}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>CO2</mat-label>
-    <input type="number" matInput formControlName="co2Value" placeholder="35" />
-  </mat-form-field>
-  <p>{{co2DataForm.value.feeling}}</p>
-  <button mat-stroked-button color="primary" (click)="selectEmoji()">
-    {{co2DataForm.value.id > -1 ? 'Edit Emoji' : 'Select Emoji'}}
-  </button>
-  <button mat-flat-button color="primary" (click)="submit()">
+<div class="add-wrapper">
+  <form [formGroup]="co2DataForm" class="table-add-item">
+    <div class="form-title">
+      Add Row
+    </div>
+    <mat-form-field>
+      <mat-label>Sector</mat-label>
+      <mat-select formControlName="sector">
+        <mat-option *ngFor="let sector of sectors" [value]="sector.name">
+          {{sector.name}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="co2DataForm.controls.sector.hasError('required')">
+        Please select a sector
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>CO2</mat-label>
+      <input type="number" matInput formControlName="co2Value" placeholder="35" />
+      <mat-error *ngIf="co2DataForm.controls.co2Value.hasError('required')">
+        Please enter a valid value
+      </mat-error>
+      <mat-error *ngIf="co2DataForm.controls.co2Value.hasError('negative')">
+        Please enter a non-negative CO2 value
+      </mat-error>
+    </mat-form-field>
+    <div class="feeling-wrapper">
+      <p>{{co2DataForm.value.feeling}}</p>
+      <button mat-stroked-button color="primary" (click)="selectEmoji()">
+        Edit Emoji
+      </button>
+    </div>
+    <div class="feeling-error">
+      <mat-error *ngIf="co2DataForm.controls.feeling.hasError('required')">
+        Please select an emoji
+      </mat-error>
+    </div>
+    <button class="btn-submit" mat-flat-button color="primary" (click)="submit()">
     {{co2DataForm.value.id > -1 ? 'Update' : 'Submit'}}
   </button>
-</form>
+  </form>
+</div>

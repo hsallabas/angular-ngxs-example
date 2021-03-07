@@ -2,7 +2,16 @@
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined");
 @import "~@ctrl/ngx-emoji-mart/picker";
 
+body {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 .wrapper {
-  
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  @media screen and (min-width: 577px) {
+    flex-direction: row;
+  }
 }

@@ -11,6 +11,13 @@ import { Add, SelectItem, Update } from "../../state/co2.actions";
 import { EmojiModalComponent } from "./emoji-modal/emoji-modal.component";
 import { NoneNegative } from "./none-negative-validator.directive";
 
+const EMPTY_CO2: Co2 = {
+  id: -1,
+  sector: "",
+  co2Value: "",
+  feeling: ""
+};
+
 const SECTOR_DATA: Sector[] = [
   { id: 1, name: "Construction" },
   { id: 2, name: "Food Industry" },
@@ -40,7 +47,7 @@ export class Co2AddComponent implements OnInit, OnDestroy {
     this.co2DataForm = this.fb.group({
       id: [-1],
       sector: ["", [Validators.required]],
-      co2Value: [0, [Validators.required]],
+      co2Value: ["", [Validators.required]],
       feeling: ["😀", [Validators.required]]
     });
     this.co2DataForm.setValidators(NoneNegative);
@@ -74,15 +81,8 @@ export class Co2AddComponent implements OnInit, OnDestroy {
       } else {
         this.store.dispatch(new Add(this.co2DataForm.value));
       }
-      const emptyCo2 = {
-        id: -1,
-        sector: "",
-        co2Value: "",
-        feeling: ""
-      };
-      this.store.dispatch(new SelectItem(emptyCo2));
-      this.co2DataForm.patchValue(emptyCo2);
-      this.co2DataForm.controls.sector.setErrors(null);
+      this.store.dispatch(new SelectItem(EMPTY_CO2));
+      this.co2DataForm.patchValue(EMPTY_CO2);
     }
   }
 }
