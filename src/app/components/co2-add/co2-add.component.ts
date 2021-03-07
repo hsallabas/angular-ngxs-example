@@ -8,7 +8,7 @@ import { Sector } from "../../models/sector.model";
 import { Co2SelectedState } from "../../state/co2-selected.state";
 import { Add, SelectItem, Update } from "../../state/co2.actions";
 import { EmojiModalComponent } from "./emoji-modal/emoji-modal.component";
-import { NonNegative } from "./positive-number-validator.directive";
+import { NoneNegative } from "./none-negative-validator.directive";
 
 const SECTOR_DATA: Sector[] = [
   { id: 1, name: "Construction" },
@@ -41,7 +41,7 @@ export class Co2AddComponent implements OnInit {
       co2Value: [0, Validators.required],
       feeling: ["😀", Validators.required]
     });
-    this.co2DataForm.setValidators(NonNegative);
+    this.co2DataForm.setValidators(NoneNegative);
     this.selectedRow$.pipe().subscribe(res => {
       if (res && res["data"] && res["data"].id >= 0) {
         this.co2DataForm.patchValue(res["data"]);

@@ -8,7 +8,11 @@
 
       <ng-container matColumnDef="co2Value">
         <mat-header-cell *matHeaderCellDef> CO2 </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.co2Value}}
+        <mat-cell
+          *matCellDef="let element"
+          [ngStyle]="{'color': element.co2Value > 25 ? 'red':'green'}"
+        >
+          {{element.co2Value}}
         </mat-cell>
       </ng-container>
 
