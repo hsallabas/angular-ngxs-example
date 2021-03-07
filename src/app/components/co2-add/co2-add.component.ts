@@ -66,7 +66,7 @@ export class Co2AddComponent implements OnInit, OnDestroy {
 
   selectEmoji() {
     const dialogRef = this.dialog.open(EmojiModalComponent, {
-      panelClass: "dialog-style"
+      panelClass: "my-full-screen-dialog"
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {

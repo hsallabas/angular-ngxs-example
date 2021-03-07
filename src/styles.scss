@@ -17,12 +17,10 @@ body {
   }
 }
 
-.dialog-style {
-  width: 40%;
-}
-
-@media only screen and (max-width: 769px) {
-  .dialog-style {
-    width: 100%;
+@media only screen and (max-width: 576px) {
+  .my-full-screen-dialog {
+    height: 100vh;
+    width: 100vw !important;
+    max-width: none !important;
   }
 }
