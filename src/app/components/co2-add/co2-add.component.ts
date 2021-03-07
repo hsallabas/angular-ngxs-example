@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 @Component({
   selector: "app-co2-add",
@@ -6,7 +7,15 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./co2-add.component.scss"]
 })
 export class Co2AddComponent implements OnInit {
-  constructor() {}
+  co2DataForm: FormGroup;
 
-  ngOnInit(): void {}
+  constructor(private fb: FormBuilder) {}
+
+  ngOnInit(): void {
+    this.co2DataForm = this.fb.group({
+      sector: ["", Validators.required],
+      co2Value: [0, Validators.required],
+      feeling: ["😀", Validators.required]
+    });
+  }
 }

@@ -1,0 +1,17 @@
+<form [formGroup]="co2DataForm" class="table-add-item">
+  <mat-form-field>
+    <mat-label>Sector</mat-label>
+    <mat-select formControlName="sector">
+      <mat-option *ngFor="let sector of sectors" [value]="sector.value">
+        {{sector.value}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>CO2</mat-label>
+    <input type="number" matInput formControlName="co2Value" placeholder="35">
+  </mat-form-field>
+  <p>{{co2DataForm.value.feeling}}</p>
+  <button mat-stroked-button color="primary" (click)="selectEmoji()">Select Emoji</button>
+  <button mat-flat-button color="primary" (click)="submit()">Submit</button>
+</form>
