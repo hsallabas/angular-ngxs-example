@@ -23,7 +23,6 @@ export class Co2SelectedState {
   @Action(SelectItem)
   slectCo2(ctx: StateContext<Co2SelectedStateModel>, action: SelectItem) {
     const state = ctx.getState();
-    console.log(action.payload);
     ctx.setState({
       ...state,
       data: action.payload
